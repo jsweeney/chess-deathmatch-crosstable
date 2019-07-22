@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-    <img
-      alt="Vue logo"
-      src="./assets/logo.png"
-    >
-    <Match msg="Death Match!!!" />
+    <Match :match="match" />
   </div>
 </template>
 
@@ -13,6 +9,46 @@ import Match from '@/components/Match.vue';
 
 export default {
   name: 'app',
+  data() {
+    return {
+      match: {
+        title: 'Bertrout v. JPS - The Canuck revenge',
+        players: [
+          { twitch: 'bertrout', chesscom: 'bertrout' },
+          { twitch: 'jasonpierresweeney', chesscom: 'jasonpsweeney' },
+        ],
+        sections: [{
+          timeControl: '10|0',
+          games: [
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+          ],
+        }, {
+          timeControl: '3|0',
+          games: [
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+          ],
+        }, {
+          timeControl: '1|0',
+          games: [
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+            { color: 'none', result: 'none' },
+          ],
+        }],
+      },
+    };
+  },
   components: {
     Match,
   },
