@@ -12,11 +12,9 @@ export default {
   data() {
     return {
       match: {
-        title: 'Bertrout v. JPS - The Canuck revenge',
-        players: [
-          { twitch: 'bertrout', chesscom: 'bertrout' },
-          { twitch: 'jasonpierresweeney', chesscom: 'jasonpsweeney' },
-        ],
+        title: 'Insert your sweet DeathMatch title',
+        players: ['Player 1', 'Player 2'],
+        configuration: '2x10|0, 4x3|0, 10x1|0',
         sections: [{
           timeControl: '10|0',
           games: [
@@ -60,8 +58,5 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
