@@ -12,35 +12,12 @@ export default {
   data() {
     return {
       match: {
-        title: 'Insert your sweet DeathMatch title',
-        players: ['Player 1', 'Player 2'],
-        configuration: '2x10|0, 4x3|0, 10x1|0',
+        title: 'Jason\'s Happy Hour - playing the field',
+        players: ['Jason', 'The field'],
+        configuration: '1x10|0, 4x3|0, 10x1|0',
         sections: [{
           timeControl: '10|0',
           games: [
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-          ],
-        }, {
-          timeControl: '3|0',
-          games: [
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-          ],
-        }, {
-          timeControl: '1|0',
-          games: [
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
-            { color: 'none', result: 'none' },
             { color: 'none', result: 'none' },
           ],
         }],

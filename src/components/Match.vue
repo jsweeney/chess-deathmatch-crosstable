@@ -5,7 +5,10 @@
     </nav>
     <div class="container">
       <div class="match">
-        <div class="title">{{match.title}}</div>
+        <div
+          class="title"
+          @click.alt="addSection()"
+        >{{match.title}}</div>
         <div class="crosstable">
           <div class="players crosstable-element">
             <div class="players-label">&nbsp;</div>
@@ -25,15 +28,19 @@
             >
               <div
                 class="time-control"
-                @click.exact="colorSection(sectionIndex)"
-                @click.shift="clearSection(sectionIndex)"
+                @click.ctrl="colorSection(sectionIndex)"
+                @click.meta="clearSection(sectionIndex)"
+                @click.alt="addGame(sectionIndex)"
+                @click.shift="deleteSection(sectionIndex)"
               >{{section.timeControl}}</div>
               <div class="games">
                 <div
                   class="game"
                   v-for="(game, gameIndex) in section.games"
                   :key="gameIndex"
-                  @click="scoreGame(sectionIndex, gameIndex)"
+                  @click.exact="scoreGame(sectionIndex, gameIndex)"
+                  @click.meta="colorGame(sectionIndex, gameIndex)"
+                  @click.shift="deleteGame(sectionIndex, gameIndex)"
                 >
                   <div class="top">
                     <div
@@ -111,6 +118,23 @@
                       class="active"
                       for="last_name"
                     >Last Name</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div
+                    class="input-field col s1"
+                    v-for="(section, sectionIndex) in this.match.sections"
+                    :key="sectionIndex"
+                  >
+                    <input
+                      id="lastName"
+                      type="text"
+                      v-model="section.timeControl"
+                    >
+                    <label
+                      class="active"
+                      for="last_name"
+                    >Sect. {{sectionIndex + 1}}</label>
                   </div>
                 </div>
                 <div class="row">
@@ -200,6 +224,20 @@ export default {
         this.match.sections[sectionIndex].games[gameIndex].result = 'none';
       }
     },
+    addSection() {
+      const games = [{ color: 'none', result: 'none' }];
+      this.match.sections.push({ timeControl: 'x|x', games });
+    },
+    deleteSection(sectionIndex) {
+      this.match.sections.splice(sectionIndex, 1);
+    },
+    addGame(sectionIndex) {
+      const game = { color: 'none', result: 'none' };
+      this.match.sections[sectionIndex].games.push(game);
+    },
+    deleteGame(sectionIndex, gameIndex) {
+      this.match.sections[sectionIndex].games.splice(gameIndex, 1);
+    },
     scoreGame(sectionIndex, gameIndex) {
       const game = this.match.sections[sectionIndex].games[gameIndex];
       switch (game.result) {
@@ -220,6 +258,24 @@ export default {
       }
       this.match.sections[sectionIndex].games[gameIndex] = game;
     },
+    colorGame(sectionIndex, gameIndex) {
+      const game = this.match.sections[sectionIndex].games[gameIndex];
+      let color;
+      switch (game.color) {
+        case 'none': {
+          color = 'white';
+          break;
+        }
+        case 'white': {
+          color = 'black';
+          break;
+        }
+        default:
+          color = 'none';
+      }
+      game.color = color;
+      this.match.sections[sectionIndex].games[gameIndex] = game;
+    },
   },
 };
 </script>
@@ -236,13 +292,15 @@ export default {
   font-size: 3em;
   color: black;
   text-align: center;
+  cursor: pointer;
+  user-select: none;
 }
 .match {
   padding: 50px 0;
 }
 .crosstable {
   padding: 20px 0;
-  text-align: center;
+  text-align: left;
 }
 .crosstable-element {
   display: inline-block;
